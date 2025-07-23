@@ -1,0 +1,27 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:elevation="6dp"
+    android:backgroundTint="#FFFFFF"
+    android:radius="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/weatherText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/condition_clear_sky"
+            android:textColor="#333333"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Add more fields here if needed like temperature, humidity, etc -->
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

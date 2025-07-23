@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">LifeTracker</string>
+    <string name="location_loading">Location loading...</string>
+    <string name="write_a_note">Write a note</string>
+    <string name="add_note">Add Note</string>
+    <string name="fetching_location">Fetching location...</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="weather_info">Weather Info</string>
+    <string name="saved_notes">Saved Notes</string>
+    <string name="current_location">Current Location</string>
+    <string name="write_your_note_here">Write your note here</string>
+    <string name="save_note">Save Note</string>
+    <string name="saved_note_will_appear_here">Saved Note will appear here</string>
+    <string name="enter_city_e_g_toronto">Enter city (e.g., Toronto)</string>
+    <string name="get_weather">Get Weather</string>
+    <string name="note_text">Note Text</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="condition_clear_sky">Condition: Clear Sky</string>
+</resources>
