@@ -18,36 +18,40 @@ class DatabaseHelper(context: Context) :
     }
 
     fun insertData(name: String) {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put("name", name)
-        db.insert("records", null, values)
+        writableDatabase.use { db ->
+            val values = ContentValues()
+            values.put("name", name)
+            db.insert("records", null, values)
+        }
     }
 
     fun updateData(id: Int, name: String): Int {
-        val db = writableDatabase
-        val values = ContentValues()
-        values.put("name", name)
-        return db.update("records", values, "id=?", arrayOf(id.toString()))
+        return writableDatabase.use { db ->
+            val values = ContentValues()
+            values.put("name", name)
+            db.update("records", values, "id=?", arrayOf(id.toString()))
+        }
     }
 
     fun deleteData(id: Int): Int {
-        val db = writableDatabase
-        return db.delete("records", "id=?", arrayOf(id.toString()))
+        return writableDatabase.use { db ->
+            db.delete("records", "id=?", arrayOf(id.toString()))
+        }
     }
 
     fun getAllData(): List<Pair<Int, String>> {
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM records", null)
         val list = mutableListOf<Pair<Int, String>>()
-        if (cursor.moveToFirst()) {
-            do {
-                val id = cursor.getInt(0)
-                val name = cursor.getString(1)
-                list.add(Pair(id, name))
-            } while (cursor.moveToNext())
+        readableDatabase.use { db ->
+            db.rawQuery("SELECT * FROM records", null).use { cursor ->
+                if (cursor.moveToFirst()) {
+                    do {
+                        val id = cursor.getInt(0)
+                        val name = cursor.getString(1)
+                        list.add(Pair(id, name))
+                    } while (cursor.moveToNext())
+                }
+            }
         }
-        cursor.close()
         return list
     }
 }

@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(.gradlew --stop)",
+      "Bash(cmd /c \"gradlew.bat --stop\")",
+      "Bash(cmd /c \"cd /d \"\"D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker\"\" && gradlew.bat --stop 2>&1\")",
+      "Bash(cmd /c \"rmdir /s /q \"\"D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker\\\\app\\\\build\"\" 2>&1 && echo DELETED OK\")",
+      "Bash(cmd /c \"if exist \"\"D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker\\\\app\\\\build\"\" \\(echo STILL EXISTS\\) else \\(echo DELETED OK\\)\")",
+      "Bash(powershell -Command \"Test-Path ''D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker\\\\app\\\\build''\")",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker\\\\app\\\\build'' -ErrorAction SilentlyContinue; Write-Host ''Done''\")",
+      "Bash(powershell -Command \"Get-Process -Name ''java'' -ErrorAction SilentlyContinue | Where-Object { $_CommandLine -like ''*kotlin*'' -or $_CommandLine -like ''*daemon*'' } | Stop-Process -Force; Write-Host ''Kotlin daemons killed''\")",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''C:\\\\Users\\\\HP\\\\.kotlin\\\\sessions'' -ErrorAction SilentlyContinue; Write-Host ''Sessions cleared''\")",
+      "Bash(powershell -Command \"Set-Location ''D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker''; .\\\\gradlew.bat clean 2>&1\")",
+      "Bash(powershell -Command \"Set-Location ''D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker''; .\\\\gradlew.bat compileDebugUnitTestKotlin 2>&1\")",
+      "Bash(powershell -Command \"Set-Location ''D:\\\\second_sem\\\\kotlin\\(mobile_Application\\)\\\\Projects\\\\LifeTracker''; .\\\\gradlew.bat testDebugUnitTest --tests ''com.conestoga.lifetracker.ApiIntegrationTest'' 2>&1\")"
+    ]
+  }
+}

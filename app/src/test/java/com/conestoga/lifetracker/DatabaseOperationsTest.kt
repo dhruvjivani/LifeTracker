@@ -37,18 +37,20 @@ class DatabaseOperationsTest {
      * Verifies that inserting a note returns a valid ID
      */
     @Test
-    fun testInsertNote_Success() = runBlocking {
-        // Arrange
-        val noteToInsert = Note(id = 0, title = "Test Note", createdAt = 1000L)
-        whenever(mockNoteDao.insertNote(NoteEntity(title = "Test Note", createdAt = 1000L)))
-            .thenReturn(1L)
+    fun testInsertNote_Success() {
+        runBlocking {
+            // Arrange
+            val noteToInsert = Note(id = 0, title = "Test Note", createdAt = 1000L)
+            whenever(mockNoteDao.insertNote(NoteEntity(title = "Test Note", createdAt = 1000L)))
+                .thenReturn(1L)
 
-        // Act
-        val result = noteRepository.insertNote(noteToInsert)
+            // Act
+            val result = noteRepository.insertNote(noteToInsert)
 
-        // Assert
-        assertEquals("Insert should return ID 1", 1L, result)
-        verify(mockNoteDao).insertNote(NoteEntity(title = "Test Note", createdAt = 1000L))
+            // Assert
+            assertEquals("Insert should return ID 1", 1L, result)
+            verify(mockNoteDao).insertNote(NoteEntity(title = "Test Note", createdAt = 1000L))
+        }
     }
 
     /**
@@ -100,18 +102,20 @@ class DatabaseOperationsTest {
      * Verifies that updating a note returns 1 (rows affected)
      */
     @Test
-    fun testUpdateNote_Success() = runBlocking {
-        // Arrange
-        val noteToUpdate = Note(id = 1, title = "Updated Note", createdAt = 1000L)
-        whenever(mockNoteDao.updateNote(NoteEntity(id = 1, title = "Updated Note", createdAt = 1000L)))
-            .thenReturn(1)
+    fun testUpdateNote_Success() {
+        runBlocking {
+            // Arrange
+            val noteToUpdate = Note(id = 1, title = "Updated Note", createdAt = 1000L)
+            whenever(mockNoteDao.updateNote(NoteEntity(id = 1, title = "Updated Note", createdAt = 1000L)))
+                .thenReturn(1)
 
-        // Act
-        val result = noteRepository.updateNote(noteToUpdate)
+            // Act
+            val result = noteRepository.updateNote(noteToUpdate)
 
-        // Assert
-        assertEquals("Update should affect 1 row", 1, result)
-        verify(mockNoteDao).updateNote(NoteEntity(id = 1, title = "Updated Note", createdAt = 1000L))
+            // Assert
+            assertEquals("Update should affect 1 row", 1, result)
+            verify(mockNoteDao).updateNote(NoteEntity(id = 1, title = "Updated Note", createdAt = 1000L))
+        }
     }
 
     /**
@@ -158,17 +162,19 @@ class DatabaseOperationsTest {
      * Verifies that deleting a note returns 1 (rows affected)
      */
     @Test
-    fun testDeleteNote_Success() = runBlocking {
-        // Arrange
-        whenever(mockNoteDao.deleteNoteById(1))
-            .thenReturn(1)
+    fun testDeleteNote_Success() {
+        runBlocking {
+            // Arrange
+            whenever(mockNoteDao.deleteNoteById(1))
+                .thenReturn(1)
 
-        // Act
-        val result = noteRepository.deleteNoteById(1)
+            // Act
+            val result = noteRepository.deleteNoteById(1)
 
-        // Assert
-        assertEquals("Delete should affect 1 row", 1, result)
-        verify(mockNoteDao).deleteNoteById(1)
+            // Assert
+            assertEquals("Delete should affect 1 row", 1, result)
+            verify(mockNoteDao).deleteNoteById(1)
+        }
     }
 
     /**

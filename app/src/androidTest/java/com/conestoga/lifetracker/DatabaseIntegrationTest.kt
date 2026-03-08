@@ -190,8 +190,8 @@ class DatabaseIntegrationTest {
 
         // Assert
         assertEquals("Should have 2 notes", 2, allNotes.size)
-        assertTrue("Notes should be from repository", 
-            allNotes.any { it.title == "Repo Note 1" && it.title == "Repo Note 2" })
+        assertTrue("Notes should be from repository",
+            allNotes.any { it.title == "Repo Note 1" } && allNotes.any { it.title == "Repo Note 2" })
     }
 
     /**

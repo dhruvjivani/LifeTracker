@@ -1,7 +1,10 @@
 package com.conestoga.lifetracker
 
+import android.Manifest
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.closeSoftKeyboard
+import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -9,6 +12,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.GrantPermissionRule
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -21,6 +25,12 @@ import org.junit.runner.RunWith
 class MainActivityUITest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
+
+    @get:Rule
+    val locationPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     /**
      * Test Case 1: Verify MainActivity loads with all buttons visible
@@ -91,10 +101,10 @@ class WeatherActivityUITest {
     @Test
     fun testEnterCityAndFetchWeather() {
         onView(withId(R.id.editCityInput))
-            .perform(typeText("London"))
+            .perform(replaceText("London"), closeSoftKeyboard())
         onView(withId(R.id.btnFetchWeather))
             .perform(click())
-        // Note: Actual API call would be made here
+        onView(withId(R.id.editCityInput)).check(matches(withText("London")))
     }
 }
 
@@ -125,10 +135,10 @@ class DatabaseActivityUITest {
     @Test
     fun testAddNewNote() {
         onView(withId(R.id.editDbInput))
-            .perform(typeText("Test Note"))
+            .perform(typeText("Test Note"), closeSoftKeyboard())
         onView(withId(R.id.btnAddDb))
             .perform(click())
-        // Note would be added to RecyclerView
+        onView(withId(R.id.editDbInput)).check(matches(withText("")))
     }
 
     /**
@@ -139,7 +149,7 @@ class DatabaseActivityUITest {
     fun testAddEmptyNoteShowsError() {
         onView(withId(R.id.btnAddDb))
             .perform(click())
-        // Toast should appear with error message
+        onView(withId(R.id.editDbInput)).check(matches(withText("")))
     }
 }
 
@@ -151,6 +161,12 @@ class DatabaseActivityUITest {
 class LocationActivityUITest {
     @get:Rule
     val activityRule = ActivityScenarioRule(LocationActivity::class.java)
+
+    @get:Rule
+    val locationPermissionRule: GrantPermissionRule = GrantPermissionRule.grant(
+        Manifest.permission.ACCESS_FINE_LOCATION,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    )
 
     /**
      * Test Case 10: Verify LocationActivity loads correctly
